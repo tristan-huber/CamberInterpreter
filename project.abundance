@@ -12,8 +12,7 @@
     },
     {
       "name": "HullLengthInches",
-      "ioValue": 144,
-      "currentEquation": "144"
+      "ioValue": 144
     },
     {
       "name": "HullThickness",
@@ -37,7 +36,7 @@
     {
       "atomType": "Input",
       "x": 0.0231,
-      "y": 0.3257142857142857,
+      "y": 0.14,
       "uniqueID": "id-21352",
       "name": "JSONblob",
       "type": "string"
@@ -45,9 +44,252 @@
     {
       "atomType": "Input",
       "x": 0.0231,
-      "y": 0.5257142857142857,
+      "y": 0.22400000000000003,
       "uniqueID": "id-21355",
       "name": "HullLengthInches"
+    },
+    {
+      "atomType": "Rectangle",
+      "x": 0.14778645833333334,
+      "y": 0.6828571428571429,
+      "uniqueID": "id-21471",
+      "ioValues": [
+        {
+          "name": "x length",
+          "ioValue": 164,
+          "currentEquation": "HullLengthInches + 20"
+        },
+        {
+          "name": "y length",
+          "ioValue": 144,
+          "currentEquation": "HullLengthInches"
+        }
+      ]
+    },
+    {
+      "atomType": "Move",
+      "x": 0.2604166666666667,
+      "y": 0.7714285714285715,
+      "uniqueID": "id-21475",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "xDist",
+          "ioValue": 72,
+          "currentEquation": "HullLengthInches / 2"
+        },
+        {
+          "name": "yDist",
+          "ioValue": -72,
+          "currentEquation": "-HullLengthInches / 2"
+        },
+        {
+          "name": "zDist",
+          "ioValue": 0
+        }
+      ]
+    },
+    {
+      "atomType": "Extrude",
+      "x": 0.359375,
+      "y": 0.7942857142857144,
+      "uniqueID": "id-21481",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "height",
+          "ioValue": -144,
+          "currentEquation": "-HullLengthInches"
+        }
+      ]
+    },
+    {
+      "atomType": "Difference",
+      "x": 0.4329427083333333,
+      "y": 0.6314285714285715,
+      "uniqueID": "id-21485",
+      "ioValues": [
+        {
+          "name": "retain",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "remove",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
+      "atomType": "Code",
+      "x": 0.4928385416666667,
+      "y": 0.8285714285714286,
+      "uniqueID": "id-21489",
+      "ioValues": [
+        {
+          "name": "assembly",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "interpreterVersion": 1,
+      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
+      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.5787760416666667,
+      "y": 0.5428571428571428,
+      "uniqueID": "id-21499",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
+    },
+    {
+      "atomType": "Tag",
+      "x": 0.6907552083333333,
+      "y": 0.43714285714285717,
+      "uniqueID": "id-21504",
+      "name": "hullfaces",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tags": [
+        "hullfaces"
+      ]
+    },
+    {
+      "atomType": "Input",
+      "x": 0.0231,
+      "y": 0.30800000000000005,
+      "uniqueID": "id-21507",
+      "name": "HullThickness"
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.39713541666666663,
+      "y": 0.2571428571428572,
+      "uniqueID": "id-21459",
+      "name": "crv.OpenWireLoft",
+      "ioValues": [
+        {
+          "name": "Wires",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Thickness",
+          "ioValue": 0
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-21455",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.41861979166666663,
+          "y": 0.5416666666666666,
+          "uniqueID": "id-21456",
+          "ioValues": [
+            {
+              "name": "wires",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "thickness",
+              "ioValue": 0
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "\n/**\n * =========================================================================\n *  ABUNDANCE CODE ATOM — Quick Reference\n * =========================================================================\n *\n *  HOW INPUTS WORK\n *  ---------------\n *  Every parameter of run() becomes an input port on this atom.\n *  Four types are supported:\n *\n *    number   -> numeric input / slider\n *    string   -> text input  (great for hex color codes, labels, etc.)\n *    boolean  -> true/false toggle\n *    Assembly -> geometry -- wire this to the output of another atom\n *\n *  Give a parameter a default value ( = x ) to make it optional.\n *  Mark it with ? (name?: Assembly) to make it optional with no default.\n *  Parameters without a default must be connected before the atom runs.\n *\n *  RETURN VALUE\n *  ------------\n *  Return an Assembly, an Assembly[], or a primitive (number/string/boolean).\n *  Returning an Assembly[] lets downstream atoms (BOM, cut layout...)\n *  see each piece independently.\n *\n *  GEOMETRY API  (replicad is available as a global)\n *  -------------------------------------------------\n *  Create 2-D sketches\n *    replicad.drawCircle(radius)\n *    replicad.drawRectangle(width, height)\n *    replicad.drawRoundedRectangle(width, height, cornerRadius)\n *\n *  Turn a 2-D sketch into a 3-D solid\n *    sketch.sketchOnPlane().extrude(distance)\n *    sketch.sketchOnPlane().revolve()          // rotate 360 deg around Z\n *\n *  Create 3-D primitives directly\n *    replicad.makeBaseBox(width, depth, height)\n *    replicad.makeSphere(radius)\n *    replicad.makeCylinder(radius, height)\n *\n *  Boolean operations\n *    solidA.fuse(solidB)                       // union\n *    solidA.cut(solidB)                        // difference (cut a hole)\n *    solidA.intersect(solidB)                  // intersection\n *\n *  Post-processing\n *    solid.fillet(radius)                      // round ALL edges\n *    solid.fillet(r, e => e.inPlane(\"XY\", z))  // round only top-face edges\n *    solid.chamfer(distance)                   // bevel ALL edges\n *    solid.translate(x, y, z)                  // move the solid\n *    solid.rotate(angle, [0, 0, 1])            // rotate around Z axis\n *\n *  ASSEMBLY CLASS\n *  --------------\n *  Wrap any replicad solid in an Assembly to attach display metadata:\n *    new Assembly({ geometry, color, tags, bom })\n *      geometry -> replicad solid / drawing returned by the API above\n *      color    -> hex string shown in the 3-D viewport  (\"#A3CE5B\")\n *      tags     -> string[] used for filtering in cut layout / BOM\n *      bom      -> string[] lines added to the Bill of Materials panel\n *\n *  AI PROMPT TIP\n *  -------------\n *  Copy the code in this editor into ChatGPT / Claude and say something like:\n *    \"Modify this Abundance Code Atom to create a gear with 12 teeth\"\n *    \"Change this to make a hexagonal nut instead of a round plate\"\n *  The comments above give the AI all the context it needs to produce\n *  valid, working Abundance TypeScript code.\n * =========================================================================\n */\n\n/**\n * A rectangular mounting plate with a circular hole in the centre.\n * All parameters have defaults so the atom produces geometry immediately\n * after creation — no connections required to get started.\n */\n\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n * \n * Notice that defaults are set for both count and offset.\n */\nfunction run(wires: Assembly, thickness: number = 1) {\n  const wireList: replicad.Wire[] = []\n  wires.onLeafs((leaf) => {\n    if (leaf.isWire()) {\n      if (leaf.geometry.isClosed) {\n        throw new Error(\"Only open wires allowed for this loft operation\")\n      }\n      wireList.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  const result = [];\n  for (let i = 0; i < wireList.length - 1; i++) {\n    const surf = replicad.loft(wireList.slice(i, i + 2), {}, true)\n    if (thickness != 0) {\n      const offset = replicad.makeOffset(surf.faces[0], thickness);\n      const w1 = replicad.assembleWire(surf.edges)\n      const w2 = replicad.assembleWire(offset.edges)\n      const boundary = replicad.loft([w2, w1], {}, true)\n      result.push(replicad.makeSolid([surf, offset, boundary]))\n    } else {\n      result.push(surf)\n    }\n  }\n  return result;\n}\n",
+          "compiledCode": "\"use strict\";\n/**\n * =========================================================================\n *  ABUNDANCE CODE ATOM — Quick Reference\n * =========================================================================\n *\n *  HOW INPUTS WORK\n *  ---------------\n *  Every parameter of run() becomes an input port on this atom.\n *  Four types are supported:\n *\n *    number   -> numeric input / slider\n *    string   -> text input  (great for hex color codes, labels, etc.)\n *    boolean  -> true/false toggle\n *    Assembly -> geometry -- wire this to the output of another atom\n *\n *  Give a parameter a default value ( = x ) to make it optional.\n *  Mark it with ? (name?: Assembly) to make it optional with no default.\n *  Parameters without a default must be connected before the atom runs.\n *\n *  RETURN VALUE\n *  ------------\n *  Return an Assembly, an Assembly[], or a primitive (number/string/boolean).\n *  Returning an Assembly[] lets downstream atoms (BOM, cut layout...)\n *  see each piece independently.\n *\n *  GEOMETRY API  (replicad is available as a global)\n *  -------------------------------------------------\n *  Create 2-D sketches\n *    replicad.drawCircle(radius)\n *    replicad.drawRectangle(width, height)\n *    replicad.drawRoundedRectangle(width, height, cornerRadius)\n *\n *  Turn a 2-D sketch into a 3-D solid\n *    sketch.sketchOnPlane().extrude(distance)\n *    sketch.sketchOnPlane().revolve()          // rotate 360 deg around Z\n *\n *  Create 3-D primitives directly\n *    replicad.makeBaseBox(width, depth, height)\n *    replicad.makeSphere(radius)\n *    replicad.makeCylinder(radius, height)\n *\n *  Boolean operations\n *    solidA.fuse(solidB)                       // union\n *    solidA.cut(solidB)                        // difference (cut a hole)\n *    solidA.intersect(solidB)                  // intersection\n *\n *  Post-processing\n *    solid.fillet(radius)                      // round ALL edges\n *    solid.fillet(r, e => e.inPlane(\"XY\", z))  // round only top-face edges\n *    solid.chamfer(distance)                   // bevel ALL edges\n *    solid.translate(x, y, z)                  // move the solid\n *    solid.rotate(angle, [0, 0, 1])            // rotate around Z axis\n *\n *  ASSEMBLY CLASS\n *  --------------\n *  Wrap any replicad solid in an Assembly to attach display metadata:\n *    new Assembly({ geometry, color, tags, bom })\n *      geometry -> replicad solid / drawing returned by the API above\n *      color    -> hex string shown in the 3-D viewport  (\"#A3CE5B\")\n *      tags     -> string[] used for filtering in cut layout / BOM\n *      bom      -> string[] lines added to the Bill of Materials panel\n *\n *  AI PROMPT TIP\n *  -------------\n *  Copy the code in this editor into ChatGPT / Claude and say something like:\n *    \"Modify this Abundance Code Atom to create a gear with 12 teeth\"\n *    \"Change this to make a hexagonal nut instead of a round plate\"\n *  The comments above give the AI all the context it needs to produce\n *  valid, working Abundance TypeScript code.\n * =========================================================================\n */\n/**\n * A rectangular mounting plate with a circular hole in the centre.\n * All parameters have defaults so the atom produces geometry immediately\n * after creation — no connections required to get started.\n */\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n *\n * Notice that defaults are set for both count and offset.\n */\nfunction run(wires, thickness = 1) {\n    const wireList = [];\n    wires.onLeafs((leaf) => {\n        if (leaf.isWire()) {\n            if (leaf.geometry.isClosed) {\n                throw new Error(\"Only open wires allowed for this loft operation\");\n            }\n            wireList.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    const result = [];\n    for (let i = 0; i < wireList.length - 1; i++) {\n        const surf = replicad.loft(wireList.slice(i, i + 2), {}, true);\n        if (thickness != 0) {\n            const offset = replicad.makeOffset(surf.faces[0], thickness);\n            const w1 = replicad.assembleWire(surf.edges);\n            const w2 = replicad.assembleWire(offset.edges);\n            const boundary = replicad.loft([w2, w1], {}, true);\n            result.push(replicad.makeSolid([surf, offset, boundary]));\n        }\n        else {\n            result.push(surf);\n        }\n    }\n    return result;\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0231,
+          "y": 0.14,
+          "uniqueID": "id-21457",
+          "name": "Wires",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0231,
+          "y": 0.22400000000000003,
+          "uniqueID": "id-21458",
+          "name": "Thickness",
+          "type": "number"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-21456",
+          "ap2ID": "id-21455"
+        },
+        {
+          "ap2Name": "wires",
+          "ap1ID": "id-21457",
+          "ap2ID": "id-21456"
+        },
+        {
+          "ap2Name": "thickness",
+          "ap1ID": "id-21458",
+          "ap2ID": "id-21456"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-02T18:23:39.160Z",
+        "privateRepo": false,
+        "repoName": "crv.OpenWireLoft",
+        "dateCreated": "2026-05-14T19:26:17Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.OpenWireLoft/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-3829",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/crv.OpenWireLoft",
+        "topics": [
+          "abundance-tool"
+        ],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739799",
+        "ranking": 1.2,
+        "searchField": "crv.openwireloft tristan-huber loft between open wires to generate a solid with fixed thickness. performs a ruled loft. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Loft between open wires to generate a solid with fixed thickness. Performs a ruled loft.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.OpenWireLoft/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.OpenWireLoft/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1783030936350
     },
     {
       "atomType": "GitHubMolecule",
@@ -394,250 +636,6 @@
       "unitsKey": "Inches",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1783030889541
-    },
-    {
-      "atomType": "GitHubMolecule",
-      "x": 0.39713541666666663,
-      "y": 0.2571428571428572,
-      "uniqueID": "id-21459",
-      "name": "crv.OpenWireLoft",
-      "ioValues": [
-        {
-          "name": "Wires",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Thickness",
-          "ioValue": 0,
-          "currentEquation": "0"
-        }
-      ],
-      "topLevel": false,
-      "allAtoms": [
-        {
-          "atomType": "Output",
-          "x": 0.98,
-          "y": 0.5,
-          "uniqueID": "id-21455",
-          "ioValues": [
-            {
-              "name": "number or geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            }
-          ]
-        },
-        {
-          "atomType": "Code",
-          "x": 0.41861979166666663,
-          "y": 0.5416666666666666,
-          "uniqueID": "id-21456",
-          "ioValues": [
-            {
-              "name": "wires",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "thickness",
-              "ioValue": 0
-            }
-          ],
-          "interpreterVersion": 1,
-          "code": "\n/**\n * =========================================================================\n *  ABUNDANCE CODE ATOM — Quick Reference\n * =========================================================================\n *\n *  HOW INPUTS WORK\n *  ---------------\n *  Every parameter of run() becomes an input port on this atom.\n *  Four types are supported:\n *\n *    number   -> numeric input / slider\n *    string   -> text input  (great for hex color codes, labels, etc.)\n *    boolean  -> true/false toggle\n *    Assembly -> geometry -- wire this to the output of another atom\n *\n *  Give a parameter a default value ( = x ) to make it optional.\n *  Mark it with ? (name?: Assembly) to make it optional with no default.\n *  Parameters without a default must be connected before the atom runs.\n *\n *  RETURN VALUE\n *  ------------\n *  Return an Assembly, an Assembly[], or a primitive (number/string/boolean).\n *  Returning an Assembly[] lets downstream atoms (BOM, cut layout...)\n *  see each piece independently.\n *\n *  GEOMETRY API  (replicad is available as a global)\n *  -------------------------------------------------\n *  Create 2-D sketches\n *    replicad.drawCircle(radius)\n *    replicad.drawRectangle(width, height)\n *    replicad.drawRoundedRectangle(width, height, cornerRadius)\n *\n *  Turn a 2-D sketch into a 3-D solid\n *    sketch.sketchOnPlane().extrude(distance)\n *    sketch.sketchOnPlane().revolve()          // rotate 360 deg around Z\n *\n *  Create 3-D primitives directly\n *    replicad.makeBaseBox(width, depth, height)\n *    replicad.makeSphere(radius)\n *    replicad.makeCylinder(radius, height)\n *\n *  Boolean operations\n *    solidA.fuse(solidB)                       // union\n *    solidA.cut(solidB)                        // difference (cut a hole)\n *    solidA.intersect(solidB)                  // intersection\n *\n *  Post-processing\n *    solid.fillet(radius)                      // round ALL edges\n *    solid.fillet(r, e => e.inPlane(\"XY\", z))  // round only top-face edges\n *    solid.chamfer(distance)                   // bevel ALL edges\n *    solid.translate(x, y, z)                  // move the solid\n *    solid.rotate(angle, [0, 0, 1])            // rotate around Z axis\n *\n *  ASSEMBLY CLASS\n *  --------------\n *  Wrap any replicad solid in an Assembly to attach display metadata:\n *    new Assembly({ geometry, color, tags, bom })\n *      geometry -> replicad solid / drawing returned by the API above\n *      color    -> hex string shown in the 3-D viewport  (\"#A3CE5B\")\n *      tags     -> string[] used for filtering in cut layout / BOM\n *      bom      -> string[] lines added to the Bill of Materials panel\n *\n *  AI PROMPT TIP\n *  -------------\n *  Copy the code in this editor into ChatGPT / Claude and say something like:\n *    \"Modify this Abundance Code Atom to create a gear with 12 teeth\"\n *    \"Change this to make a hexagonal nut instead of a round plate\"\n *  The comments above give the AI all the context it needs to produce\n *  valid, working Abundance TypeScript code.\n * =========================================================================\n */\n\n/**\n * A rectangular mounting plate with a circular hole in the centre.\n * All parameters have defaults so the atom produces geometry immediately\n * after creation — no connections required to get started.\n */\n\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n * \n * Notice that defaults are set for both count and offset.\n */\nfunction run(wires: Assembly, thickness: number = 1) {\n  const wireList: replicad.Wire[] = []\n  wires.onLeafs((leaf) => {\n    if (leaf.isWire()) {\n      if (leaf.geometry.isClosed) {\n        throw new Error(\"Only open wires allowed for this loft operation\")\n      }\n      wireList.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  const result = [];\n  for (let i = 0; i < wireList.length - 1; i++) {\n    const surf = replicad.loft(wireList.slice(i, i + 2), {}, true)\n    if (thickness != 0) {\n      const offset = replicad.makeOffset(surf.faces[0], thickness);\n      const w1 = replicad.assembleWire(surf.edges)\n      const w2 = replicad.assembleWire(offset.edges)\n      const boundary = replicad.loft([w2, w1], {}, true)\n      result.push(replicad.makeSolid([surf, offset, boundary]))\n    } else {\n      result.push(surf)\n    }\n  }\n  return result;\n}\n",
-          "compiledCode": "\"use strict\";\n/**\n * =========================================================================\n *  ABUNDANCE CODE ATOM — Quick Reference\n * =========================================================================\n *\n *  HOW INPUTS WORK\n *  ---------------\n *  Every parameter of run() becomes an input port on this atom.\n *  Four types are supported:\n *\n *    number   -> numeric input / slider\n *    string   -> text input  (great for hex color codes, labels, etc.)\n *    boolean  -> true/false toggle\n *    Assembly -> geometry -- wire this to the output of another atom\n *\n *  Give a parameter a default value ( = x ) to make it optional.\n *  Mark it with ? (name?: Assembly) to make it optional with no default.\n *  Parameters without a default must be connected before the atom runs.\n *\n *  RETURN VALUE\n *  ------------\n *  Return an Assembly, an Assembly[], or a primitive (number/string/boolean).\n *  Returning an Assembly[] lets downstream atoms (BOM, cut layout...)\n *  see each piece independently.\n *\n *  GEOMETRY API  (replicad is available as a global)\n *  -------------------------------------------------\n *  Create 2-D sketches\n *    replicad.drawCircle(radius)\n *    replicad.drawRectangle(width, height)\n *    replicad.drawRoundedRectangle(width, height, cornerRadius)\n *\n *  Turn a 2-D sketch into a 3-D solid\n *    sketch.sketchOnPlane().extrude(distance)\n *    sketch.sketchOnPlane().revolve()          // rotate 360 deg around Z\n *\n *  Create 3-D primitives directly\n *    replicad.makeBaseBox(width, depth, height)\n *    replicad.makeSphere(radius)\n *    replicad.makeCylinder(radius, height)\n *\n *  Boolean operations\n *    solidA.fuse(solidB)                       // union\n *    solidA.cut(solidB)                        // difference (cut a hole)\n *    solidA.intersect(solidB)                  // intersection\n *\n *  Post-processing\n *    solid.fillet(radius)                      // round ALL edges\n *    solid.fillet(r, e => e.inPlane(\"XY\", z))  // round only top-face edges\n *    solid.chamfer(distance)                   // bevel ALL edges\n *    solid.translate(x, y, z)                  // move the solid\n *    solid.rotate(angle, [0, 0, 1])            // rotate around Z axis\n *\n *  ASSEMBLY CLASS\n *  --------------\n *  Wrap any replicad solid in an Assembly to attach display metadata:\n *    new Assembly({ geometry, color, tags, bom })\n *      geometry -> replicad solid / drawing returned by the API above\n *      color    -> hex string shown in the 3-D viewport  (\"#A3CE5B\")\n *      tags     -> string[] used for filtering in cut layout / BOM\n *      bom      -> string[] lines added to the Bill of Materials panel\n *\n *  AI PROMPT TIP\n *  -------------\n *  Copy the code in this editor into ChatGPT / Claude and say something like:\n *    \"Modify this Abundance Code Atom to create a gear with 12 teeth\"\n *    \"Change this to make a hexagonal nut instead of a round plate\"\n *  The comments above give the AI all the context it needs to produce\n *  valid, working Abundance TypeScript code.\n * =========================================================================\n */\n/**\n * A rectangular mounting plate with a circular hole in the centre.\n * All parameters have defaults so the atom produces geometry immediately\n * after creation — no connections required to get started.\n */\n/**\n * This code atom implements a simple linear layout funtion which repeats\n * shape count times in the positive X direction with offset space\n * between each. Works for either 2D or 3D shapes. Negative offset\n * and negative counts invert the direction.\n *\n * Notice that defaults are set for both count and offset.\n */\nfunction run(wires, thickness = 1) {\n    const wireList = [];\n    wires.onLeafs((leaf) => {\n        if (leaf.isWire()) {\n            if (leaf.geometry.isClosed) {\n                throw new Error(\"Only open wires allowed for this loft operation\");\n            }\n            wireList.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    const result = [];\n    for (let i = 0; i < wireList.length - 1; i++) {\n        const surf = replicad.loft(wireList.slice(i, i + 2), {}, true);\n        if (thickness != 0) {\n            const offset = replicad.makeOffset(surf.faces[0], thickness);\n            const w1 = replicad.assembleWire(surf.edges);\n            const w2 = replicad.assembleWire(offset.edges);\n            const boundary = replicad.loft([w2, w1], {}, true);\n            result.push(replicad.makeSolid([surf, offset, boundary]));\n        }\n        else {\n            result.push(surf);\n        }\n    }\n    return result;\n}\n"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.0231,
-          "y": 0.14,
-          "uniqueID": "id-21457",
-          "name": "Wires",
-          "type": "geometry"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.0231,
-          "y": 0.22400000000000003,
-          "uniqueID": "id-21458",
-          "name": "Thickness",
-          "type": "number"
-        }
-      ],
-      "allConnectors": [
-        {
-          "ap2Name": "number or geometry",
-          "ap1ID": "id-21456",
-          "ap2ID": "id-21455"
-        },
-        {
-          "ap2Name": "wires",
-          "ap1ID": "id-21457",
-          "ap2ID": "id-21456"
-        },
-        {
-          "ap2Name": "thickness",
-          "ap1ID": "id-21458",
-          "ap2ID": "id-21456"
-        }
-      ],
-      "parentRepo": {
-        "lastFoundGit": "2026-07-02T18:23:39.160Z",
-        "privateRepo": false,
-        "repoName": "crv.OpenWireLoft",
-        "dateCreated": "2026-05-14T19:26:17Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/tristan-huber/crv.OpenWireLoft/master/README.md?sanitize=true",
-        "yyyy": 2026,
-        "topMoleculeID": "id-3829",
-        "githubMoleculesUsed": [],
-        "html_url": "https://github.com/tristan-huber/crv.OpenWireLoft",
-        "topics": [
-          "abundance-tool"
-        ],
-        "parentRepo": null,
-        "forks": 0,
-        "dateModified": "739799",
-        "ranking": 1.2,
-        "searchField": "crv.openwireloft tristan-huber loft between open wires to generate a solid with fixed thickness. performs a ruled loft. abundance-tool",
-        "owner": "tristan-huber",
-        "description": "Loft between open wires to generate a solid with fixed thickness. Performs a ruled loft.",
-        "contentURL": "https://raw.githubusercontent.com/tristan-huber/crv.OpenWireLoft/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/tristan-huber/crv.OpenWireLoft/master/project.svg?sanitize=true",
-        "isLocal": false
-      },
-      "unitsKey": "Unitless",
-      "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1783030936350
-    },
-    {
-      "atomType": "Rectangle",
-      "x": 0.14778645833333334,
-      "y": 0.6828571428571429,
-      "uniqueID": "id-21471",
-      "ioValues": [
-        {
-          "name": "x length",
-          "ioValue": 164,
-          "currentEquation": "HullLengthInches + 20"
-        },
-        {
-          "name": "y length",
-          "ioValue": 144,
-          "currentEquation": "HullLengthInches"
-        }
-      ]
-    },
-    {
-      "atomType": "Move",
-      "x": 0.2604166666666667,
-      "y": 0.7714285714285715,
-      "uniqueID": "id-21475",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 72,
-          "currentEquation": "HullLengthInches / 2"
-        },
-        {
-          "name": "yDist",
-          "ioValue": -72,
-          "currentEquation": "-HullLengthInches / 2"
-        },
-        {
-          "name": "zDist",
-          "ioValue": 0
-        }
-      ]
-    },
-    {
-      "atomType": "Extrude",
-      "x": 0.359375,
-      "y": 0.7942857142857144,
-      "uniqueID": "id-21481",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "height",
-          "ioValue": -144,
-          "currentEquation": "-HullLengthInches"
-        }
-      ]
-    },
-    {
-      "atomType": "Difference",
-      "x": 0.4329427083333333,
-      "y": 0.6314285714285715,
-      "uniqueID": "id-21485",
-      "ioValues": [
-        {
-          "name": "retain",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "remove",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ]
-    },
-    {
-      "atomType": "Code",
-      "x": 0.4928385416666667,
-      "y": 0.8285714285714286,
-      "uniqueID": "id-21489",
-      "ioValues": [
-        {
-          "name": "assembly",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
-    },
-    {
-      "atomType": "Assembly",
-      "x": 0.5859375,
-      "y": 0.74,
-      "uniqueID": "id-21499",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        }
-      ]
-    },
-    {
-      "atomType": "Tag",
-      "x": 0.6595052083333334,
-      "y": 0.8799999999999999,
-      "uniqueID": "id-21504",
-      "name": "hullfaces",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "tags": [
-        "hullfaces"
-      ]
-    },
-    {
-      "atomType": "Input",
-      "x": 0.0231,
-      "y": 0.74,
-      "uniqueID": "id-21507",
-      "name": "HullThickness"
     }
   ],
   "allConnectors": [
@@ -650,16 +648,6 @@
       "ap2Name": "HullLengthInches",
       "ap1ID": "id-21355",
       "ap2ID": "id-21421"
-    },
-    {
-      "ap2Name": "Wires",
-      "ap1ID": "id-21421",
-      "ap2ID": "id-21459"
-    },
-    {
-      "ap2Name": "retain",
-      "ap1ID": "id-21459",
-      "ap2ID": "id-21485"
     },
     {
       "ap2Name": "geometry",
@@ -695,6 +683,21 @@
       "ap2Name": "geometry",
       "ap1ID": "id-21499",
       "ap2ID": "id-21504"
+    },
+    {
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-21504",
+      "ap2ID": "id-21350"
+    },
+    {
+      "ap2Name": "retain",
+      "ap1ID": "id-21459",
+      "ap2ID": "id-21485"
+    },
+    {
+      "ap2Name": "Wires",
+      "ap1ID": "id-21421",
+      "ap2ID": "id-21459"
     }
   ],
   "unitsKey": "Inches",
