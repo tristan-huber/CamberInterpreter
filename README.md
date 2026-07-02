@@ -8,6 +8,7 @@
 
 - **JSONblob** (string)
 - **HullLengthInches** (number)
+- **HullThickness** (number)
 
 
 
