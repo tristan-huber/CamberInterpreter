@@ -13,10 +13,6 @@
     {
       "name": "HullLengthInches",
       "ioValue": 144
-    },
-    {
-      "name": "HullThickness",
-      "ioValue": 10
     }
   ],
   "topLevel": true,
@@ -171,13 +167,6 @@
       "tags": [
         "hullfaces"
       ]
-    },
-    {
-      "atomType": "Input",
-      "x": 0.0231,
-      "y": 0.30800000000000005,
-      "uniqueID": "id-21507",
-      "name": "HullThickness"
     },
     {
       "atomType": "Tag",
