@@ -567,8 +567,8 @@
     },
     {
       "atomType": "Difference",
-      "x": 0.48958333333333337,
-      "y": 0.6714285714285715,
+      "x": 0.4329427083333333,
+      "y": 0.6314285714285715,
       "uniqueID": "id-21485",
       "ioValues": [
         {
@@ -583,8 +583,8 @@
     },
     {
       "atomType": "Code",
-      "x": 0.65625,
-      "y": 0.74,
+      "x": 0.4928385416666667,
+      "y": 0.8285714285714286,
       "uniqueID": "id-21489",
       "ioValues": [
         {
@@ -595,6 +595,38 @@
       "interpreterVersion": 1,
       "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
       "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.5859375,
+      "y": 0.74,
+      "uniqueID": "id-21499",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
+    },
+    {
+      "atomType": "Tag",
+      "x": 0.6595052083333334,
+      "y": 0.8799999999999999,
+      "uniqueID": "id-21504",
+      "name": "hullfaces",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tags": [
+        "hullfaces"
+      ]
     }
   ],
   "allConnectors": [
@@ -637,6 +669,21 @@
       "ap2Name": "assembly",
       "ap1ID": "id-21485",
       "ap2ID": "id-21489"
+    },
+    {
+      "ap2Name": "Shape 2",
+      "ap1ID": "id-21485",
+      "ap2ID": "id-21499"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-21489",
+      "ap2ID": "id-21499"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-21499",
+      "ap2ID": "id-21504"
     }
   ],
   "unitsKey": "Inches",
