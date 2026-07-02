@@ -636,6 +636,22 @@
       "unitsKey": "Inches",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1783030889541
+    },
+    {
+      "atomType": "Tag",
+      "x": 0.52734375,
+      "y": 0.3257142857142857,
+      "uniqueID": "id-21582",
+      "name": "halfhull",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tags": [
+        "halfhull"
+      ]
     }
   ],
   "allConnectors": [
@@ -670,9 +686,9 @@
       "ap2ID": "id-21489"
     },
     {
-      "ap2Name": "Shape 2",
+      "ap2Name": "geometry",
       "ap1ID": "id-21485",
-      "ap2ID": "id-21499"
+      "ap2ID": "id-21582"
     },
     {
       "ap2Name": "Shape 1",
@@ -698,6 +714,11 @@
       "ap2Name": "Wires",
       "ap1ID": "id-21421",
       "ap2ID": "id-21459"
+    },
+    {
+      "ap2Name": "Shape 2",
+      "ap1ID": "id-21582",
+      "ap2ID": "id-21499"
     }
   ],
   "unitsKey": "Inches",
