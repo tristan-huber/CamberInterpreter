@@ -580,6 +580,21 @@
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
+    },
+    {
+      "atomType": "Code",
+      "x": 0.65625,
+      "y": 0.74,
+      "uniqueID": "id-21489",
+      "ioValues": [
+        {
+          "name": "assembly",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "interpreterVersion": 1,
+      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
+      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
     }
   ],
   "allConnectors": [
@@ -617,6 +632,11 @@
       "ap2Name": "remove",
       "ap1ID": "id-21481",
       "ap2ID": "id-21485"
+    },
+    {
+      "ap2Name": "assembly",
+      "ap1ID": "id-21485",
+      "ap2ID": "id-21489"
     }
   ],
   "unitsKey": "Inches",
