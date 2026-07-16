@@ -186,8 +186,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.39713541666666663,
-      "y": 0.2571428571428572,
+      "x": 0.328125,
+      "y": 0.3761840324763194,
       "uniqueID": "id-21459",
       "name": "crv.OpenWireLoft",
       "ioValues": [
@@ -719,6 +719,22 @@
       "unitsKey": "Inches",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1783622598962
+    },
+    {
+      "atomType": "Difference",
+      "x": 0.4423828125,
+      "y": 0.36129905277401897,
+      "uniqueID": "id-21944",
+      "ioValues": [
+        {
+          "name": "retain",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "remove",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
     }
   ],
   "allConnectors": [
@@ -746,6 +762,11 @@
       "ap2Name": "remove",
       "ap1ID": "id-21481",
       "ap2ID": "id-21485"
+    },
+    {
+      "ap2Name": "retain",
+      "ap1ID": "id-21481",
+      "ap2ID": "id-21944"
     },
     {
       "ap2Name": "assembly",
@@ -781,6 +802,11 @@
       "ap2Name": "retain",
       "ap1ID": "id-21459",
       "ap2ID": "id-21485"
+    },
+    {
+      "ap2Name": "remove",
+      "ap1ID": "id-21459",
+      "ap2ID": "id-21944"
     },
     {
       "ap2Name": "Wires",
