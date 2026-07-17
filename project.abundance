@@ -46,8 +46,8 @@
     },
     {
       "atomType": "Rectangle",
-      "x": 0.08203125,
-      "y": 0.7257142857142858,
+      "x": 0.06119791666666667,
+      "y": 0.6514285714285714,
       "uniqueID": "id-21471",
       "ioValues": [
         {
@@ -64,8 +64,8 @@
     },
     {
       "atomType": "Move",
-      "x": 0.19075520833333334,
-      "y": 0.6142857142857143,
+      "x": 0.15234375,
+      "y": 0.5828571428571429,
       "uniqueID": "id-21475",
       "ioValues": [
         {
@@ -90,8 +90,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.21223958333333331,
-      "y": 0.8285714285714286,
+      "x": 0.14973958333333334,
+      "y": 0.84,
       "uniqueID": "id-21481",
       "ioValues": [
         {
@@ -107,8 +107,8 @@
     },
     {
       "atomType": "Difference",
-      "x": 0.421875,
-      "y": 0.6257142857142857,
+      "x": 0.40494791666666663,
+      "y": 0.8114285714285715,
       "uniqueID": "id-21485",
       "ioValues": [
         {
@@ -155,8 +155,8 @@
     },
     {
       "atomType": "Tag",
-      "x": 0.49609375,
-      "y": 0.5542857142857143,
+      "x": 0.5032552083333334,
+      "y": 0.6771428571428572,
       "uniqueID": "id-21582",
       "name": "halfhull",
       "ioValues": [
@@ -171,8 +171,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.3268229166666667,
-      "y": 0.8628571428571429,
+      "x": 0.31575520833333337,
+      "y": 0.9628571428571427,
       "uniqueID": "id-22619",
       "ioValues": [
         {
@@ -187,8 +187,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.5651041666666666,
-      "y": 0.18285714285714286,
+      "x": 0.5787760416666667,
+      "y": 0.15428571428571428,
       "uniqueID": "id-22734",
       "ioValues": [
         {
@@ -196,7 +196,7 @@
           "ioValue": null
         },
         {
-          "name": "Shape 3",
+          "name": "Shape 4",
           "ioValue": null
         }
       ]
@@ -275,8 +275,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.2669270833333333,
-      "y": 0.43999999999999995,
+      "x": 0.2265625,
+      "y": 0.4114285714285715,
       "uniqueID": "id-22369",
       "name": "crv.OpenWireLoft",
       "ioValues": [
@@ -471,8 +471,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.32747395833333337,
-      "y": 0.11142857142857143,
+      "x": 0.4466145833333333,
+      "y": 0.12285714285714286,
       "uniqueID": "id-22756",
       "name": "util.Mirror",
       "topLevel": false,
@@ -953,8 +953,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.18033854166666669,
-      "y": 0.3028571428571429,
+      "x": 0.16536458333333334,
+      "y": 0.23428571428571426,
       "uniqueID": "id-21861",
       "name": "CamberToWires",
       "ioValues": [
@@ -1377,8 +1377,8 @@
     },
     {
       "atomType": "Code",
-      "x": 0.416015625,
-      "y": 0.2657142857142857,
+      "x": 0.38932291666666663,
+      "y": 0.13142857142857142,
       "uniqueID": "id-23124",
       "ioValues": [
         {
@@ -1393,6 +1393,248 @@
       "interpreterVersion": 1,
       "code": "function run(faces: Assembly, cuttingSolid: Assembly) {\n  const cutters: replicad.Shape3D[] = []\n  cuttingSolid.onLeafs((leaf) => {\n    if (leaf.is3D() && replicad.isShape3D(leaf.geometry)) {\n      cutters.push(leaf.geometry)\n    } else {\n      throw Error(\"cuttingSolid must be a 3d shape. was: \" + leaf)\n    }\n    return leaf;\n  })\n\n  return faces.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      const norm = leaf.geometry.normalAt([0.5,0.5]).normalize().multiply(-1)\n      let solid = replicad.basicFaceExtrusion(leaf.geometry, norm)\n      for (const cutter of cutters) {\n        solid = solid.cut(cutter)\n      }\n\n      // select trimmed face\n      for (const candidateResult of solid.faces) {\n        const point = candidateResult.pointOnSurface(0.5,0.5)\n        const found = new replicad.FaceFinder().containsPoint(point).find(leaf.geometry)\n        console.log(found)\n        if (found.length > 0) {\n          // A central point of the candidate face is on the input face. This should only happen for one candidate\n          leaf.geometry = candidateResult\n          return leaf;\n        }\n      }\n      console.warn(\"Didn't find a face in the result which corresponds to our input face\")\n      return undefined\n    } else {\n      throw new Error(\"Faces to trim were not of type face \" + leaf)\n    }\n  })\n}",
       "compiledCode": "\"use strict\";\nfunction run(faces, cuttingSolid) {\n    const cutters = [];\n    cuttingSolid.onLeafs((leaf) => {\n        if (leaf.is3D() && replicad.isShape3D(leaf.geometry)) {\n            cutters.push(leaf.geometry);\n        }\n        else {\n            throw Error(\"cuttingSolid must be a 3d shape. was: \" + leaf);\n        }\n        return leaf;\n    });\n    return faces.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            const norm = leaf.geometry.normalAt([0.5, 0.5]).normalize().multiply(-1);\n            let solid = replicad.basicFaceExtrusion(leaf.geometry, norm);\n            for (const cutter of cutters) {\n                solid = solid.cut(cutter);\n            }\n            // select trimmed face\n            for (const candidateResult of solid.faces) {\n                const point = candidateResult.pointOnSurface(0.5, 0.5);\n                const found = new replicad.FaceFinder().containsPoint(point).find(leaf.geometry);\n                console.log(found);\n                if (found.length > 0) {\n                    // A central point of the candidate face is on the input face. This should only happen for one candidate\n                    leaf.geometry = candidateResult;\n                    return leaf;\n                }\n            }\n            console.warn(\"Didn't find a face in the result which corresponds to our input face\");\n            return undefined;\n        }\n        else {\n            throw new Error(\"Faces to trim were not of type face \" + leaf);\n        }\n    });\n}\n"
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.390625,
+      "y": 0.3257142857142857,
+      "uniqueID": "id-23140",
+      "name": "util.FaceDifference",
+      "ioValues": [
+        {
+          "name": "faces",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "cuttingSolid",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-23136",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.3079427083333333,
+          "y": 0.5771428571428572,
+          "uniqueID": "id-23137",
+          "ioValues": [
+            {
+              "name": "faces",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "cuttingSolid",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(faces: Assembly, cuttingSolid: Assembly) {\n  const cutters: replicad.Shape3D[] = []\n  cuttingSolid.onLeafs((leaf) => {\n    if (leaf.is3D() && replicad.isShape3D(leaf.geometry)) {\n      cutters.push(leaf.geometry)\n    } else {\n      throw Error(\"cuttingSolid must be a 3d shape. was: \" + leaf)\n    }\n    return leaf;\n  })\n\n  return faces.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Face) {\n      const norm = leaf.geometry.normalAt([0.5, 0.5]).normalize().multiply(-1)\n      let solid = replicad.basicFaceExtrusion(leaf.geometry, norm)\n      for (const cutter of cutters) {\n        solid = solid.cut(cutter)\n      }\n\n      // select trimmed face\n      for (const candidateResult of solid.faces) {\n        const point = candidateResult.pointOnSurface(0.5, 0.5)\n        const found = new replicad.FaceFinder().containsPoint(point).find(leaf.geometry)\n        console.log(found)\n        if (found.length > 0) {\n          // A central point of the candidate face is on the input face. This should only happen for one candidate\n          leaf.geometry = candidateResult\n          return leaf;\n        }\n      }\n      console.warn(\"Didn't find a face in the result which corresponds to our input face\")\n      return undefined\n    } else {\n      throw new Error(\"Faces to trim were not of type face \" + leaf)\n    }\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(faces, cuttingSolid) {\n    const cutters = [];\n    cuttingSolid.onLeafs((leaf) => {\n        if (leaf.is3D() && replicad.isShape3D(leaf.geometry)) {\n            cutters.push(leaf.geometry);\n        }\n        else {\n            throw Error(\"cuttingSolid must be a 3d shape. was: \" + leaf);\n        }\n        return leaf;\n    });\n    return faces.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Face) {\n            const norm = leaf.geometry.normalAt([0.5, 0.5]).normalize().multiply(-1);\n            let solid = replicad.basicFaceExtrusion(leaf.geometry, norm);\n            for (const cutter of cutters) {\n                solid = solid.cut(cutter);\n            }\n            // select trimmed face\n            for (const candidateResult of solid.faces) {\n                const point = candidateResult.pointOnSurface(0.5, 0.5);\n                const found = new replicad.FaceFinder().containsPoint(point).find(leaf.geometry);\n                console.log(found);\n                if (found.length > 0) {\n                    // A central point of the candidate face is on the input face. This should only happen for one candidate\n                    leaf.geometry = candidateResult;\n                    return leaf;\n                }\n            }\n            console.warn(\"Didn't find a face in the result which corresponds to our input face\");\n            return undefined;\n        }\n        else {\n            throw new Error(\"Faces to trim were not of type face \" + leaf);\n        }\n    });\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-23138",
+          "name": "faces",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.24615384615384617,
+          "uniqueID": "id-23139",
+          "name": "cuttingSolid",
+          "type": "geometry"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-23137",
+          "ap2ID": "id-23136"
+        },
+        {
+          "ap2Name": "faces",
+          "ap1ID": "id-23138",
+          "ap2ID": "id-23137"
+        },
+        {
+          "ap2Name": "cuttingSolid",
+          "ap1ID": "id-23139",
+          "ap2ID": "id-23137"
+        }
+      ],
+      "parentRepo": {
+        "privateRepo": false,
+        "repoName": "util.FaceDifference",
+        "dateCreated": "2026-07-17T21:23:02Z",
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/util.FaceDifference/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-22894",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/util.FaceDifference",
+        "topics": [
+          "abundance-tool"
+        ],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739814",
+        "ranking": 0,
+        "searchField": "util.facedifference tristan-huber trim or cut a face with a cutting solid or assembly. performs a boolean difference. the default difference operator doesn't operate on faces so this is a workaround. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Trim or cut a face with a cutting solid or assembly. Performs a boolean difference. The default difference operator doesn't operate on faces so this is a workaround.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.FaceDifference/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.FaceDifference/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784323488411
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.6419270833333334,
+      "y": 0.5085714285714286,
+      "uniqueID": "id-23159",
+      "name": "ClosestEdge",
+      "ioValues": [
+        {
+          "name": "EdgeFrom",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "NearestTo",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "tieTolerance",
+          "ioValue": 0.001
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-23154",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.4309895833333333,
+          "y": 0.5059523809523809,
+          "uniqueID": "id-23155",
+          "ioValues": [
+            {
+              "name": "edgeFrom",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "nearestTo",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "tolerance",
+              "ioValue": 0.001
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "\nfunction run(\n  edgeFrom: Assembly,\n  nearestTo: Assembly,\n  tolerance: number = 0.001\n) {\n  let best: replicad.Edge[] = [];\n  let bestDist = Infinity;\n  const target: replicad.Vector = new replicad.Vector(getBBoxCenter(nearestTo)).multiply(-1)\n  edgeFrom.onLeafs((leaf) => {\n    if (!(leaf.geometry instanceof replicad.Drawing)) {\n      for (const edge of leaf.geometry.edges) {\n        const dist = edge.pointAt(.5).add(target).Length;\n        if (dist - bestDist < -1 * tolerance || best.length == 0) {\n          console.log(\"new best dist: \", dist)\n          best = [edge]\n          bestDist = dist;\n        } else if (Math.abs(dist - bestDist) < tolerance) {\n          // include ties\n          best.push(edge)\n        }\n      }\n      return leaf;\n    }\n  })\n  console.log(best)\n  return best.map((e) => { return replicad.assembleWire([e]) });\n}\n\nfunction getBBoxCenter(foo: Assembly) {\n  let bbox: replicad.BoundingBox = undefined;\n  foo.onLeafs((leaf) => {\n    if (bbox == undefined) {\n      bbox = leaf.geometry.boundingBox;\n    } else {\n      bbox.add(leaf.geometry.boundingBox)\n    }\n  })\n  return bbox.center;\n}\n/*\n  const surfaces = [];\n  const leadFaceEdges = [];\n  const endFaceEdges = [];\n  for (let i = 0; i < wireList.length; i++) {\n    const w1 = wireList[i]\n    const w2 = wireList[(i + 1) % wireList.length]\n    const surf = replicad.loft([w1, w2], {}, true)\n    surfaces.push(surf)\n    leadFaceEdges.push(replicad.makeLine(w1.startPoint, w2.startPoint))\n    endFaceEdges.push(replicad.makeLine(w1.endPoint, w2.endPoint))\n  }\n  const frontCap = replicad.makeNonPlanarFace(replicad.assembleWire(leadFaceEdges))\n  const endCap = replicad.makeNonPlanarFace(replicad.assembleWire(endFaceEdges))\n\n  return replicad.makeSolid([frontCap, ...surfaces, endCap])*/",
+          "compiledCode": "\"use strict\";\nfunction run(edgeFrom, nearestTo, tolerance = 0.001) {\n    let best = [];\n    let bestDist = Infinity;\n    const target = new replicad.Vector(getBBoxCenter(nearestTo)).multiply(-1);\n    edgeFrom.onLeafs((leaf) => {\n        if (!(leaf.geometry instanceof replicad.Drawing)) {\n            for (const edge of leaf.geometry.edges) {\n                const dist = edge.pointAt(.5).add(target).Length;\n                if (dist - bestDist < -1 * tolerance || best.length == 0) {\n                    console.log(\"new best dist: \", dist);\n                    best = [edge];\n                    bestDist = dist;\n                }\n                else if (Math.abs(dist - bestDist) < tolerance) {\n                    // include ties\n                    best.push(edge);\n                }\n            }\n            return leaf;\n        }\n    });\n    console.log(best);\n    return best.map((e) => { return replicad.assembleWire([e]); });\n}\nfunction getBBoxCenter(foo) {\n    let bbox = undefined;\n    foo.onLeafs((leaf) => {\n        if (bbox == undefined) {\n            bbox = leaf.geometry.boundingBox;\n        }\n        else {\n            bbox.add(leaf.geometry.boundingBox);\n        }\n    });\n    return bbox.center;\n}\n/*\n  const surfaces = [];\n  const leadFaceEdges = [];\n  const endFaceEdges = [];\n  for (let i = 0; i < wireList.length; i++) {\n    const w1 = wireList[i]\n    const w2 = wireList[(i + 1) % wireList.length]\n    const surf = replicad.loft([w1, w2], {}, true)\n    surfaces.push(surf)\n    leadFaceEdges.push(replicad.makeLine(w1.startPoint, w2.startPoint))\n    endFaceEdges.push(replicad.makeLine(w1.endPoint, w2.endPoint))\n  }\n  const frontCap = replicad.makeNonPlanarFace(replicad.assembleWire(leadFaceEdges))\n  const endCap = replicad.makeNonPlanarFace(replicad.assembleWire(endFaceEdges))\n\n  return replicad.makeSolid([frontCap, ...surfaces, endCap])*/ \n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-23156",
+          "name": "EdgeFrom",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.24615384615384617,
+          "uniqueID": "id-23157",
+          "name": "NearestTo",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.3384615384615385,
+          "uniqueID": "id-23158",
+          "name": "tieTolerance"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-23155",
+          "ap2ID": "id-23154"
+        },
+        {
+          "ap2Name": "edgeFrom",
+          "ap1ID": "id-23156",
+          "ap2ID": "id-23155"
+        },
+        {
+          "ap2Name": "nearestTo",
+          "ap1ID": "id-23157",
+          "ap2ID": "id-23155"
+        },
+        {
+          "ap2Name": "tolerance",
+          "ap1ID": "id-23158",
+          "ap2ID": "id-23155"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-17T18:23:39.149Z",
+        "privateRepo": false,
+        "repoName": "ClosestEdge",
+        "dateCreated": "2026-07-05T16:50:19Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-22851",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/ClosestEdge",
+        "topics": [
+          "abundance-tool"
+        ],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739814",
+        "ranking": 1.2,
+        "searchField": "closestedge tristan-huber return a single edge from an assembly which is closest to another selector shape / assembly. pick an edge based on distance / nearness abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Return a single edge from an assembly which is closest to another selector shape / assembly. Pick an edge based on distance / nearness",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/ClosestEdge/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784323539410
     }
   ],
   "allConnectors": [
@@ -1430,6 +1672,11 @@
       "ap2Name": "cuttingSolid",
       "ap1ID": "id-21481",
       "ap2ID": "id-23124"
+    },
+    {
+      "ap2Name": "cuttingSolid",
+      "ap1ID": "id-21481",
+      "ap2ID": "id-23140"
     },
     {
       "ap2Name": "geometry",
@@ -1492,14 +1739,14 @@
       "ap2ID": "id-22619"
     },
     {
-      "ap2Name": "assembly",
+      "ap2Name": "faces",
       "ap1ID": "id-22369",
-      "ap2ID": "id-22756"
+      "ap2ID": "id-23124"
     },
     {
       "ap2Name": "faces",
       "ap1ID": "id-22369",
-      "ap2ID": "id-23124"
+      "ap2ID": "id-23140"
     },
     {
       "ap2Name": "Shape 1",
@@ -1527,11 +1774,6 @@
       "ap2ID": "id-22891"
     },
     {
-      "ap2Name": "Shape 3",
-      "ap1ID": "id-22896",
-      "ap2ID": "id-22734"
-    },
-    {
       "ap2Name": "remove",
       "ap1ID": "id-22918",
       "ap2ID": "id-22963"
@@ -1545,6 +1787,16 @@
       "ap2Name": "geometry",
       "ap1ID": "id-21861",
       "ap2ID": "id-22867"
+    },
+    {
+      "ap2Name": "assembly",
+      "ap1ID": "id-23140",
+      "ap2ID": "id-22756"
+    },
+    {
+      "ap2Name": "Shape 4",
+      "ap1ID": "id-23140",
+      "ap2ID": "id-22734"
     }
   ],
   "unitsKey": "Inches",
