@@ -32,7 +32,7 @@
     {
       "atomType": "Input",
       "x": 0.0231,
-      "y": 0.14,
+      "y": 0.2714285714285714,
       "uniqueID": "id-21352",
       "name": "JSONblob",
       "type": "string"
@@ -40,7 +40,7 @@
     {
       "atomType": "Input",
       "x": 0.0231,
-      "y": 0.22400000000000003,
+      "y": 0.4971428571428571,
       "uniqueID": "id-21355",
       "name": "HullLengthInches"
     },
