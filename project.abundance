@@ -84,14 +84,15 @@
         },
         {
           "name": "zDist",
-          "ioValue": 0
+          "ioValue": 4,
+          "currentEquation": "4"
         }
       ]
     },
     {
       "atomType": "Extrude",
-      "x": 0.34895833333333337,
-      "y": 0.8057142857142858,
+      "x": 0.31315104166666663,
+      "y": 0.8457142857142858,
       "uniqueID": "id-21481",
       "ioValues": [
         {
@@ -108,7 +109,7 @@
     {
       "atomType": "Difference",
       "x": 0.4329427083333333,
-      "y": 0.6314285714285715,
+      "y": 0.4971428571428571,
       "uniqueID": "id-21485",
       "ioValues": [
         {
@@ -120,21 +121,6 @@
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
-    },
-    {
-      "atomType": "Code",
-      "x": 0.4928385416666667,
-      "y": 0.8285714285714286,
-      "uniqueID": "id-21489",
-      "ioValues": [
-        {
-          "name": "assembly",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\")\n    return leaf\n  })\n}",
-      "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        leaf.geometry = leaf.geometry.mirror([0, 1], [0, 0], \"plane\");\n        return leaf;\n    });\n}\n"
     },
     {
       "atomType": "Assembly",
@@ -2171,6 +2157,107 @@
         }
       ],
       "fileTypeVersion": 1
+    },
+    {
+      "atomType": "Extrude",
+      "x": 0.39973958333333337,
+      "y": 0.8314285714285715,
+      "uniqueID": "id-22619",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "height",
+          "ioValue": -0.25,
+          "currentEquation": "-0.25"
+        }
+      ]
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.5162760416666666,
+      "y": 0.7685714285714286,
+      "uniqueID": "id-22628",
+      "name": "util.Mirror",
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-22625",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.4387814879906269,
+          "y": 0.2325,
+          "uniqueID": "id-22626",
+          "ioValues": [
+            {
+              "name": "assembly",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(assembly: Assembly) {\n  return assembly.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\")\n    } else {\n      leaf.geometry = leaf.geometry.mirror(\"XZ\")\n    }\n    return leaf\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(assembly) {\n    return assembly.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            leaf.geometry = leaf.geometry.mirror([1, 0], [0, 0], \"plane\");\n        }\n        else {\n            leaf.geometry = leaf.geometry.mirror(\"XZ\");\n        }\n        return leaf;\n    });\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-22627",
+          "name": "assembly"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-22626",
+          "ap2ID": "id-22625"
+        },
+        {
+          "ap2Name": "assembly",
+          "ap1ID": "id-22627",
+          "ap2ID": "id-22626"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-17T18:23:39.149Z",
+        "privateRepo": false,
+        "repoName": "util.Mirror",
+        "dateCreated": "2026-07-09T18:32:34Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-21902",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/util.Mirror",
+        "topics": [
+          "abundance-tool"
+        ],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739806",
+        "ranking": 0.6,
+        "searchField": "util.mirror tristan-huber mirror an assembly across the xz plane. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Mirror an assembly across the XZ plane.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/util.Mirror/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784317255362
     }
   ],
   "allConnectors": [
@@ -2205,19 +2292,14 @@
       "ap2ID": "id-21944"
     },
     {
-      "ap2Name": "assembly",
-      "ap1ID": "id-21485",
-      "ap2ID": "id-21489"
-    },
-    {
       "ap2Name": "geometry",
       "ap1ID": "id-21485",
       "ap2ID": "id-21582"
     },
     {
-      "ap2Name": "Shape 1",
-      "ap1ID": "id-21489",
-      "ap2ID": "id-21499"
+      "ap2Name": "assembly",
+      "ap1ID": "id-21485",
+      "ap2ID": "id-22628"
     },
     {
       "ap2Name": "geometry",
@@ -2240,11 +2322,6 @@
       "ap2ID": "id-22303"
     },
     {
-      "ap2Name": "retain",
-      "ap1ID": "id-22369",
-      "ap2ID": "id-21485"
-    },
-    {
       "ap2Name": "remove",
       "ap1ID": "id-22369",
       "ap2ID": "id-21944"
@@ -2253,6 +2330,11 @@
       "ap2Name": "shape",
       "ap1ID": "id-22369",
       "ap2ID": "id-22270"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-22369",
+      "ap2ID": "id-22619"
     },
     {
       "ap2Name": "guideWires",
@@ -2268,6 +2350,16 @@
       "ap2Name": "wires",
       "ap1ID": "id-21861",
       "ap2ID": "id-22381"
+    },
+    {
+      "ap2Name": "retain",
+      "ap1ID": "id-22619",
+      "ap2ID": "id-21485"
+    },
+    {
+      "ap2Name": "Shape 1",
+      "ap1ID": "id-22628",
+      "ap2ID": "id-21499"
     }
   ],
   "unitsKey": "Inches",
