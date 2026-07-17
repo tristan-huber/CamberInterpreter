@@ -959,6 +959,11 @@
       "ap2ID": "id-22628"
     },
     {
+      "ap2Name": "geometry",
+      "ap1ID": "id-21499",
+      "ap2ID": "id-21504"
+    },
+    {
       "ap2Name": "number or geometry",
       "ap1ID": "id-21504",
       "ap2ID": "id-21350"
@@ -997,11 +1002,6 @@
       "ap2Name": "Wires",
       "ap1ID": "id-21861",
       "ap2ID": "id-22369"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-22734",
-      "ap2ID": "id-21504"
     },
     {
       "ap2Name": "Shape 1",
