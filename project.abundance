@@ -107,8 +107,8 @@
     },
     {
       "atomType": "Difference",
-      "x": 0.4329427083333333,
-      "y": 0.4971428571428571,
+      "x": 0.421875,
+      "y": 0.6257142857142857,
       "uniqueID": "id-21485",
       "ioValues": [
         {
@@ -123,8 +123,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.5787760416666667,
-      "y": 0.5428571428571428,
+      "x": 0.6087239583333334,
+      "y": 0.7971428571428572,
       "uniqueID": "id-21499",
       "ioValues": [
         {
@@ -155,8 +155,8 @@
     },
     {
       "atomType": "Tag",
-      "x": 0.52734375,
-      "y": 0.3257142857142857,
+      "x": 0.49609375,
+      "y": 0.5542857142857143,
       "uniqueID": "id-21582",
       "name": "halfhull",
       "ioValues": [
@@ -171,8 +171,8 @@
     },
     {
       "atomType": "Extrude",
-      "x": 0.3567708333333333,
-      "y": 0.84,
+      "x": 0.3268229166666667,
+      "y": 0.8628571428571429,
       "uniqueID": "id-22619",
       "ioValues": [
         {
@@ -191,10 +191,6 @@
       "y": 0.18285714285714286,
       "uniqueID": "id-22734",
       "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
         {
           "name": "Shape 2",
           "ioValue": null
@@ -319,8 +315,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.5162760416666666,
-      "y": 0.7685714285714286,
+      "x": 0.4739583333333333,
+      "y": 0.8514285714285714,
       "uniqueID": "id-22628",
       "name": "util.Mirror",
       "topLevel": false,
@@ -1326,8 +1322,8 @@
     },
     {
       "atomType": "Move",
-      "x": 0.7330729166666666,
-      "y": 0.5,
+      "x": 0.48307291666666663,
+      "y": 0.34285714285714286,
       "uniqueID": "id-22953",
       "ioValues": [
         {
@@ -1341,8 +1337,8 @@
         },
         {
           "name": "yDist",
-          "ioValue": 72,
-          "currentEquation": "HullLengthInches / 2"
+          "ioValue": 0.1,
+          "currentEquation": "0.1"
         },
         {
           "name": "zDist",
@@ -1351,17 +1347,33 @@
       ]
     },
     {
-      "atomType": "Intersection",
-      "x": 0.89453125,
-      "y": 0.2657142857142857,
-      "uniqueID": "id-22959",
+      "atomType": "Difference",
+      "x": 0.7955729166666666,
+      "y": 0.21428571428571427,
+      "uniqueID": "id-22963",
       "ioValues": [
         {
-          "name": "geometry1",
+          "name": "retain",
           "ioValue": "__GEOMETRY_INPUT__"
         },
         {
-          "name": "geometry2",
+          "name": "remove",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ]
+    },
+    {
+      "atomType": "Difference",
+      "x": 0.87109375,
+      "y": 0.3514285714285714,
+      "uniqueID": "id-22967",
+      "ioValues": [
+        {
+          "name": "retain",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "remove",
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
@@ -1439,11 +1451,6 @@
       "ap2ID": "id-22619"
     },
     {
-      "ap2Name": "Shape 2",
-      "ap1ID": "id-22369",
-      "ap2ID": "id-22734"
-    },
-    {
       "ap2Name": "assembly",
       "ap1ID": "id-22369",
       "ap2ID": "id-22756"
@@ -1454,7 +1461,7 @@
       "ap2ID": "id-21499"
     },
     {
-      "ap2Name": "Shape 1",
+      "ap2Name": "Shape 2",
       "ap1ID": "id-22756",
       "ap2ID": "id-22734"
     },
@@ -1492,6 +1499,26 @@
       "ap2Name": "Shape 3",
       "ap1ID": "id-22896",
       "ap2ID": "id-22734"
+    },
+    {
+      "ap2Name": "remove",
+      "ap1ID": "id-22918",
+      "ap2ID": "id-22963"
+    },
+    {
+      "ap2Name": "retain",
+      "ap1ID": "id-22953",
+      "ap2ID": "id-22963"
+    },
+    {
+      "ap2Name": "retain",
+      "ap1ID": "id-22953",
+      "ap2ID": "id-22967"
+    },
+    {
+      "ap2Name": "remove",
+      "ap1ID": "id-22963",
+      "ap2ID": "id-22967"
     }
   ],
   "unitsKey": "Inches",
